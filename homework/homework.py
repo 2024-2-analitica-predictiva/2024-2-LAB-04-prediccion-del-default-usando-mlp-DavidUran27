@@ -106,7 +106,7 @@
 #   de educación, agrupe estos valores en la categoría "others".
 # - Renombre la columna "default payment next month" a "default"
 # - Remueva la columna "ID".
-
+#############
 import pandas as pd
 
 
