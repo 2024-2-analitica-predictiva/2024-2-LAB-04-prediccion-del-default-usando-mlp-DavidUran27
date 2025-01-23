@@ -106,9 +106,8 @@
 #   de educación, agrupe estos valores en la categoría "others".
 # - Renombre la columna "default payment next month" a "default"
 # - Remueva la columna "ID".
-#############
-import pandas as pd
 
+import pandas as pd
 
 #importo test
 test_data = pd.read_csv(
@@ -134,6 +133,7 @@ train_data = train_data.rename(columns={'default payment next month': 'default'}
 test_data=test_data.drop(columns=['ID'])
 train_data=train_data.drop(columns=['ID'])
 
+
 # %%
 import numpy as np
 
@@ -156,6 +156,7 @@ train_data['EDUCATION'] = train_data['EDUCATION'].apply(lambda x: 4 if x > 4 els
 #print(test_data["EDUCATION"].value_counts())
 
 # %%
+#Paso 2
 # Divida los datasets en x_train, y_train, x_test, y_test.
 x_train=train_data.drop(columns="default")
 y_train=train_data["default"]
@@ -211,9 +212,9 @@ pipeline=Pipeline(
 )
 
 
-
 # %%
-##paso 4
+## Paso4
+
 # Optimice los hiperparametros del pipeline usando validación cruzada.
 # Use 10 splits para la validación cruzada. Use la función de precision
 # balanceada para medir la precisión del modelo.
@@ -222,8 +223,6 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import make_scorer, balanced_accuracy_score
 
 # Definir los hiperparámetros a optimizar
-
- # Definir los hiperparámetros a optimizar
 
 param_grid = {
     'pca__n_components': [None],
@@ -245,9 +244,7 @@ model=GridSearchCV(
     refit=True
     )
 
-
 model.fit(x_train, y_train)
-
 
 # %%
 # Paso 5.
@@ -314,6 +311,7 @@ def calculate_and_save_metrics(model, X_train, X_test, y_train, y_test):
 
 
 # %%
+#Paso 7
 # Calcule las matrices de confusion para los conjuntos de entrenamiento y
 # prueba. Guardelas en el archivo files/output/metrics.json. Cada fila
 # del archivo es un diccionario con las metricas de un modelo.
@@ -358,7 +356,7 @@ def calculate_and_save_confusion_matrices(model1, X_train, X_test, y_train, y_te
     with open(output_path, 'a') as f:  # Usar 'a' para agregar después de las métricas
         for metric in metrics:
             f.write(json.dumps(metric) + '\n')
-
+ 
 
 # %%
 # Función principal para ejecutar todo
@@ -380,6 +378,17 @@ main(model, x_train, x_test, y_train, y_test)
 # %%
 print(model.score(x_train,y_train))
 print(model.score(x_test,y_test))
+
+# %%
+
+
+# %%
+
+
+# %%
+
+
+# %%
 
 
 # %%
